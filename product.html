@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Platform | Stropel</title>
+  <meta name="description" content="Simulation testing, production monitoring, and evaluation. One rubric across staging and live for voice and chat agents.">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,500;1,8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="chrome-header"></div>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Platform</p>
+        <h1>Simulation, evaluation, observation. One leather.</h1>
+        <p class="lede">Lifelike callers in staging. The same rubric on production calls. A hone step that proves the prompt diff before the floor hears it.</p>
+        <div class="btn-row">
+          <a class="btn btn-steel" href="docs.html#scorecard">Read a sample scorecard</a>
+          <a class="btn btn-leather" href="about.html#contact">Book a demo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-rule">
+      <div class="wrap card-grid">
+        <article class="strop-card">
+          <div class="step-num">Simulate</div>
+          <h3>Synthetic customers at load</h3>
+          <p>Accents, background noise, emotion, red-team turns. Replay a production call as a scenario. CI gates hold the merge.</p>
+          <a href="#simulate">Open simulation</a>
+        </article>
+        <article class="strop-card">
+          <div class="step-num">Evaluate</div>
+          <h3>A rubric you own</h3>
+          <p>Goal completion, policy, pronunciation, latency. Custom metrics from your rubric. Human review to set ground truth.</p>
+          <a href="#evaluate">Open evaluation</a>
+        </article>
+        <article class="strop-card">
+          <div class="step-num">Observe</div>
+          <h3>Live calls, same scores</h3>
+          <p>Score live calls. File issues. Alert to Slack or webhook. Dashboards by agent version.</p>
+          <a href="#observe">Open observation</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="simulate" class="anchor section-hide-deep">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Simulate</p>
+          <h2>Callers who interrupt, mumble, and bait policy.</h2>
+          <p>Each persona is a stamped label: accent, noise floor, interrupt timing, emotion, red-team turn. Stropel speaks those turns against your SIP, WebRTC, or HTTP agent.</p>
+          <p>
+            <span class="stamp">Accent</span>
+            <span class="stamp">Noise</span>
+            <span class="stamp">Interrupt</span>
+            <span class="stamp">Policy trap</span>
+          </p>
+          <ul>
+            <li>Replay a production call as a scenario, then mutate one turn.</li>
+            <li>Load tests with a concurrency cap you set (25 on Hone, 50 on Edge, dedicated on Mill).</li>
+            <li>CI gates: GitHub Actions and GitLab. Fail the job when a required metric drops.</li>
+          </ul>
+        </div>
+        <div class="strop-card">
+          <h3>Persona card: Priya, refund desk</h3>
+          <p class="tiny mono">persona_id · prs_mumbai_kitchen_08</p>
+          <p>Mumbai English. Kitchen noise at 58 dB. Interrupts at 8 seconds. Asks for a refund, then supplies a cousin’s date of birth when asked for identity.</p>
+          <p class="tiny">Success criterion: verify the caller against the account on file before quoting a refund amount.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="evaluate" class="anchor">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Evaluate</p>
+          <h2>Score the goal, then the manners.</h2>
+          <p>Judges read the transcript and the audio. Default family: goal completion, policy, pronunciation, latency, tone, interrupt handling. Add custom metrics from your rubric. Human review locks ground truth for a slice of rows.</p>
+        </div>
+        <div class="rings" aria-label="Sample score rings">
+          <div class="ring">
+            <svg width="108" height="108" viewBox="0 0 108 108">
+              <circle cx="54" cy="54" r="42" fill="none" stroke="#D8D3CC" stroke-width="8"/>
+              <circle class="meter" cx="54" cy="54" r="42" fill="none" stroke="#2A3038" stroke-width="8" stroke-linecap="butt" transform="rotate(-90 54 54)" data-value="94"/>
+            </svg>
+            Pronunciation 94
+          </div>
+          <div class="ring">
+            <svg width="108" height="108" viewBox="0 0 108 108">
+              <circle cx="54" cy="54" r="42" fill="none" stroke="#D8D3CC" stroke-width="8"/>
+              <circle class="meter" cx="54" cy="54" r="42" fill="none" stroke="#6B3F2A" stroke-width="8" transform="rotate(-90 54 54)" data-value="62"/>
+            </svg>
+            Goal 62
+          </div>
+          <div class="ring">
+            <svg width="108" height="108" viewBox="0 0 108 108">
+              <circle cx="54" cy="54" r="42" fill="none" stroke="#D8D3CC" stroke-width="8"/>
+              <circle class="meter" cx="54" cy="54" r="42" fill="none" stroke="#C45C2A" stroke-width="8" transform="rotate(-90 54 54)" data-value="41"/>
+            </svg>
+            Policy 41
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="observe" class="anchor section-oil">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Observe</p>
+          <h2>Production scored on the same steel.</h2>
+          <p>Ingest a live call, write scores, open an issue when a threshold trips. Dashboards group by agent version. Alerts go to Slack or a webhook you own.</p>
+          <p>Retention is customer-controlled. Hone keeps scores 7 days. Edge keeps recordings 30 days. Mill defaults to 90 days and accepts a shorter pin.</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 420 180" role="img" aria-label="Waveform with score overlay">
+            <rect width="420" height="180" fill="#1F2328"/>
+            <path d="M0 90 L12 70 L24 110 L36 60 L48 122 L60 80 L72 95 L84 40 L96 140 L108 88 L120 72 L132 100 L144 66 L156 118 L168 90 L180 50 L192 130 L204 86 L216 74 L228 108 L240 64 L252 96 L264 82 L276 120 L288 70 L300 90 L312 58 L324 112 L336 84 L348 92 L360 68 L372 104 L384 88 L396 76 L408 98 L420 90" fill="none" stroke="#D8D3CC" stroke-width="2"/>
+            <rect x="168" y="28" width="84" height="124" fill="#6B3F2A" opacity="0.35"/>
+            <text x="180" y="48" fill="#C45C2A" font-family="IBM Plex Mono, monospace" font-size="12">FAIL 41</text>
+            <text x="180" y="66" fill="#D8D3CC" font-family="IBM Plex Mono, monospace" font-size="11">identity skip</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases" class="anchor">
+      <div class="wrap">
+        <p class="eyebrow">Use cases</p>
+        <h2>Where the loop sits in the week.</h2>
+        <div class="card-grid">
+          <article class="strop-card">
+            <h3>Pre-launch suites</h3>
+            <p>A month of caller variety in a morning. Gate launch on goal and policy floors you set.</p>
+          </article>
+          <article class="strop-card">
+            <h3>Regression on prompt diffs</h3>
+            <p>Re-run the frozen suite after every prompt, tool, or voice change. Compare version to version.</p>
+          </article>
+          <article class="strop-card">
+            <h3>Production scoring</h3>
+            <p>Live minutes scored with the staging rubric. Open issues from a fail row.</p>
+          </article>
+        </div>
+        <article class="strop-card" style="margin-top: 18px;">
+          <h3>Red teams</h3>
+          <p>Policy traps, jailbreak turns, identity skip, payment-data bait. Packs ship as scenario libraries you can extend.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="industries" class="anchor section-hide-deep">
+      <div class="wrap">
+        <p class="eyebrow">Industries</p>
+        <h2>Four floors, one mill.</h2>
+        <div class="card-grid">
+          <article class="strop-card">
+            <h3>Customer support</h3>
+            <p>Ordering, returns, upsell, apology tone. Score conversion and policy on the same run.</p>
+          </article>
+          <article class="strop-card">
+            <h3>Healthcare</h3>
+            <p>Intake, identity, scheduling. Rubrics you load for PHI handling. BAA path on Mill when eligible.</p>
+          </article>
+          <article class="strop-card">
+            <h3>Financial services</h3>
+            <p>Balance, dispute, reset. Red-team packs for disclosure and authentication order.</p>
+          </article>
+        </div>
+        <article class="strop-card" style="margin-top: 18px;">
+          <h3>Logistics</h3>
+          <p>ETA, exception, driver handoff. Interrupt-heavy personas. Latency budgets that match a dock clock.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="integrations" class="anchor">
+      <div class="wrap">
+        <p class="eyebrow">Voice stacks</p>
+        <h2>Works with your SIP, your WebRTC, your HTTP agent.</h2>
+        <p>Connectors confirmed in docs: SIP trunk ingest, WebRTC session hook, HTTP webhook agent, Twilio Media Streams, LiveKit room attach, custom WebSocket. Chat agents use the same HTTP contract.</p>
+        <div class="chips">
+          <span class="chip">SIP</span>
+          <span class="chip">WebRTC</span>
+          <span class="chip">HTTP agent</span>
+          <span class="chip">Twilio Media Streams</span>
+          <span class="chip">LiveKit</span>
+          <span class="chip">WebSocket</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">GitLab CI</span>
+          <span class="chip">Slack</span>
+        </div>
+        <p style="margin-top: 18px;"><a href="docs.html#api">Open the API contract</a></p>
+      </div>
+    </section>
+  </main>
+  <div id="chrome-footer"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

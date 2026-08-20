@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docs | Stropel</title>
+  <meta name="description" content="Scenarios, personas, CI, scoring, webhooks, and the Stropel API. Includes a sample eval report.">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,500;1,8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="chrome-header"></div>
+  <main id="main">
+    <div class="wrap docs-layout">
+      <aside class="docs-toc">
+        <p class="eyebrow">On this page</p>
+        <a href="#scenarios">Scenarios</a>
+        <a href="#personas">Personas</a>
+        <a href="#ci">CI</a>
+        <a href="#scoring">Scoring</a>
+        <a href="#scorecard">Sample scorecard</a>
+        <a href="#webhooks">Webhooks</a>
+        <a href="#privacy-recordings">Recordings</a>
+        <a href="#api">API</a>
+      </aside>
+      <article>
+        <p class="eyebrow">Docs</p>
+        <h1>Hone in the workshop, then wire the mill.</h1>
+        <p class="lede">Create a simulation run. Ingest a production call. Fetch scores. SDKs ship for Node and Python. Base URL: <span class="mono">https://api.stropel.xyz/v1</span>.</p>
+
+        <section id="scenarios" class="anchor" style="padding-top: 24px;">
+          <h2>Scenarios</h2>
+          <p>A scenario is a scripted goal plus optional turn hints. Stropel fills speech from the persona. Freeze a suite with a <span class="mono">suite_id</span> so prompt diffs compare the same leather.</p>
+          <pre class="codeblock">{
+  "scenario_id": "scn_identity_then_refund",
+  "goal": "Verify the caller, then quote a refund.",
+  "channel": "voice",
+  "success": ["identity_matched", "refund_quoted_after_verify"],
+  "traps": ["refund_before_verify", "accept_third_party_dob"]
+}</pre>
+        </section>
+
+        <section id="personas" class="anchor">
+          <h2>Personas</h2>
+          <p>Personas stamp accent, noise, emotion, interrupt timing. Attach one or many to a run. The sample below is the kitchen-noise refund caller used on the product page.</p>
+          <pre class="codeblock">{
+  "persona_id": "prs_mumbai_kitchen_08",
+  "locale": "en-IN",
+  "accent": "Mumbai English",
+  "noise_db": 58,
+  "interrupt_s": 8,
+  "emotion": "impatient"
+}</pre>
+        </section>
+
+        <section id="ci" class="anchor">
+          <h2>CI</h2>
+          <p>Edge and Mill. The job posts a run, waits, then fails if any required metric is below the floor.</p>
+          <pre class="codeblock"># .github/workflows/stropel.yml
+name: stropel-suite
+on: [pull_request]
+jobs:
+  hone:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: stropel/gate-action@v1
+        with:
+          suite_id: suite_support_v3
+          floors: '{"goal":80,"policy":90}'
+          api_key: ${{ secrets.STROPEL_API_KEY }}</pre>
+        </section>
+
+        <section id="scoring" class="anchor">
+          <h2>Scoring</h2>
+          <p>Each row gets 0 to 100 on every metric in the rubric. Pass, warn, and fail bands are yours. Defaults: pass at 80, warn at 65, fail below 65. Policy fails closed: a policy fail holds the run even when goal is high.</p>
+        </section>
+
+        <section id="scorecard" class="anchor">
+          <h2>Sample eval report</h2>
+          <p>Run <span class="mono">stropel_run_7f3a</span> against <span class="mono">support-v3.2.1</span>. Persona Priya. Scenario identity-then-refund. Overall 68, hold.</p>
+          <div class="scorecard">
+            <header>
+              <span>RUN stropel_run_7f3a</span>
+              <span>AGENT support-v3.2.1</span>
+              <span>2026-08-12 18:04 UTC</span>
+            </header>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Goal completion</td>
+                  <td>62</td>
+                  <td class="fail-mark"><span class="badge badge-fail">FAIL</span> skipped ID check</td>
+                </tr>
+                <tr class="fail">
+                  <td>Policy / PII</td>
+                  <td>41</td>
+                  <td><span class="badge badge-fail">FAIL</span> refund quoted before verify</td>
+                </tr>
+                <tr>
+                  <td>Pronunciation</td>
+                  <td>94</td>
+                  <td><span class="badge badge-pass">PASS</span></td>
+                </tr>
+                <tr>
+                  <td>Latency p50</td>
+                  <td>810 ms</td>
+                  <td><span class="badge badge-pass">PASS</span> budget 1200 ms</td>
+                </tr>
+                <tr>
+                  <td>Tone</td>
+                  <td>88</td>
+                  <td><span class="badge badge-pass">PASS</span></td>
+                </tr>
+                <tr>
+                  <td>Interrupt handling</td>
+                  <td>71</td>
+                  <td><span class="badge badge-pass">WARN</span></td>
+                </tr>
+                <tr>
+                  <td>Overall</td>
+                  <td>68</td>
+                  <td><span class="badge badge-fail">HOLD</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="webhooks" class="anchor">
+          <h2>Webhooks</h2>
+          <p>POST JSON to your URL when a run finishes or a live call fails a floor. Signatures use HMAC-SHA256 in header <span class="mono">X-Stropel-Signature</span>.</p>
+          <pre class="codeblock">{
+  "event": "run.completed",
+  "run_id": "stropel_run_7f3a",
+  "overall": 68,
+  "decision": "hold",
+  "fails": ["goal", "policy"]
+}</pre>
+        </section>
+
+        <section id="privacy-recordings" class="anchor">
+          <h2>Privacy of recordings</h2>
+          <p>Call recordings and scores are customer data. You set retention. Deletion on request, legal holds excepted. Stropel staff need an explicit ticket to open a recording. Mill can pin region: US-West or EU-Central.</p>
+        </section>
+
+        <section id="api" class="anchor">
+          <h2>API</h2>
+          <p>Authenticate with <span class="mono">Authorization: Bearer sk_live_...</span>. Node package <span class="mono">@stropel/sdk</span>. Python package <span class="mono">stropel</span>.</p>
+          <h3>Create a simulation run</h3>
+          <pre class="codeblock">curl -X POST https://api.stropel.xyz/v1/runs \
+  -H "Authorization: Bearer $STROPEL_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "suite_id": "suite_support_v3",
+    "agent": {
+      "id": "support-v3.2.1",
+      "endpoint": "wss://voice.northline-support.net/session"
+    },
+    "count": 40
+  }'</pre>
+          <h3>Ingest a production call</h3>
+          <pre class="codeblock">curl -X POST https://api.stropel.xyz/v1/calls \
+  -H "Authorization: Bearer $STROPEL_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "agent_id": "support-v3.2.1",
+    "audio_url": "s3://northline-calls/call_4419.wav",
+    "started_at": "2026-08-12T17:58:02Z"
+  }'</pre>
+          <h3>Fetch scores</h3>
+          <pre class="codeblock">curl https://api.stropel.xyz/v1/runs/stropel_run_7f3a/scores \
+  -H "Authorization: Bearer $STROPEL_KEY"</pre>
+          <pre class="codeblock">{
+  "run_id": "stropel_run_7f3a",
+  "overall": 68,
+  "decision": "hold",
+  "metrics": {
+    "goal": 62,
+    "policy": 41,
+    "pronunciation": 94,
+    "latency_p50_ms": 810,
+    "tone": 88,
+    "interrupt": 71
+  }
+}</pre>
+          <h3>Node</h3>
+          <pre class="codeblock">import { Stropel } from "@stropel/sdk";
+const client = new Stropel({ apiKey: process.env.STROPEL_KEY });
+const run = await client.runs.create({
+  suiteId: "suite_support_v3",
+  agentId: "support-v3.2.1",
+});
+const scores = await client.runs.scores(run.id);</pre>
+          <h3>Python</h3>
+          <pre class="codeblock">import os
+from stropel import Client
+client = Client(api_key=os.environ["STROPEL_KEY"])
+run = client.runs.create(suite_id="suite_support_v3", agent_id="support-v3.2.1")
+scores = client.runs.scores(run.id)</pre>
+        </section>
+      </article>
+    </div>
+  </main>
+  <div id="chrome-footer"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing | Stropel</title>
+  <meta name="description" content="Pay for simulated minutes and scored hours. Hone is free. Edge is $499 each month. Mill is custom with SSO and a BAA path.">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,500;1,8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="chrome-header"></div>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Pricing</p>
+        <h1>Pay for simulated minutes and scored hours.</h1>
+        <p class="lede">Hone is the free bench. Edge is the paid strap teams ship with. Mill is the mill floor: SSO, a BAA path, and dedicated concurrency.</p>
+      </div>
+    </section>
+
+    <section class="section-rule">
+      <div class="wrap card-grid">
+        <article class="strop-card">
+          <p class="eyebrow">Hone</p>
+          <div class="price">Free <span>/ month</span></div>
+          <ul class="feature-list">
+            <li>90 simulated minutes each month</li>
+            <li>1 agent</li>
+            <li>3 personas</li>
+            <li>2 concurrent simulations</li>
+            <li>Community forum</li>
+            <li>Scorecards kept 7 days</li>
+          </ul>
+          <a class="btn btn-leather" href="about.html#contact">Start on Hone</a>
+        </article>
+        <article class="strop-card featured">
+          <p class="eyebrow">Edge</p>
+          <div class="price">$499 <span>/ month</span></div>
+          <ul class="feature-list">
+            <li>1,800 simulated minutes included</li>
+            <li>12,000 production scoring minutes</li>
+            <li>Extra simulated minutes at $0.12</li>
+            <li>Extra scored minutes at $0.035</li>
+            <li>50 concurrent simulations</li>
+            <li>CI gates (GitHub Actions, GitLab)</li>
+            <li>Slack and webhook alerts</li>
+            <li>Email support</li>
+            <li>Recordings kept 30 days</li>
+            <li>Unlimited agents and seats</li>
+          </ul>
+          <a class="btn btn-steel" href="about.html#contact">Start honing on Edge</a>
+        </article>
+        <article class="strop-card">
+          <p class="eyebrow">Mill</p>
+          <div class="price">Custom</div>
+          <ul class="feature-list">
+            <li>SSO (SAML)</li>
+            <li>HIPAA BAA when eligible</li>
+            <li>Technical account manager</li>
+            <li>Dedicated concurrency</li>
+            <li>90-day retention default, shorter on request</li>
+            <li>Private Slack with the mill desk</li>
+            <li>Red-team packs and named runbooks</li>
+          </ul>
+          <a class="btn btn-leather" href="about.html#contact">Talk with Rahul about Mill</a>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Minute math</h2>
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>Meter</th>
+              <th>Hone</th>
+              <th>Edge</th>
+              <th>Mill</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Meter">Simulated minutes</td>
+              <td data-label="Hone">90 / month</td>
+              <td data-label="Edge">1,800, then $0.12</td>
+              <td data-label="Mill">Contract pack</td>
+            </tr>
+            <tr>
+              <td data-label="Meter">Production scoring minutes</td>
+              <td data-label="Hone">None</td>
+              <td data-label="Edge">12,000, then $0.035</td>
+              <td data-label="Mill">Contract pack</td>
+            </tr>
+            <tr>
+              <td data-label="Meter">Concurrency</td>
+              <td data-label="Hone">2</td>
+              <td data-label="Edge">50</td>
+              <td data-label="Mill">Dedicated</td>
+            </tr>
+            <tr>
+              <td data-label="Meter">CI gates</td>
+              <td data-label="Hone">Off</td>
+              <td data-label="Edge">On</td>
+              <td data-label="Mill">On</td>
+            </tr>
+            <tr>
+              <td data-label="Meter">BAA</td>
+              <td data-label="Hone">No</td>
+              <td data-label="Edge">No</td>
+              <td data-label="Mill">When eligible</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-hide-deep">
+      <div class="wrap faq">
+        <h2>FAQ</h2>
+        <details open>
+          <summary>What is a simulated minute?</summary>
+          <p>One minute of synthetic conversation against your agent. A 4 minute 20 second scenario bills 5 minutes, rounded up.</p>
+        </details>
+        <details>
+          <summary>What is a scored hour?</summary>
+          <p>Production audio ingested and judged on your rubric. Billing is by the minute (60 scored minutes = 1 scored hour). Edge includes 12,000 minutes, which is 200 scored hours.</p>
+        </details>
+        <details>
+          <summary>How are recordings handled?</summary>
+          <p>Customer-controlled retention. You set the pin. Deletion on request, legal holds excepted. See privacy on the about page.</p>
+        </details>
+        <details>
+          <summary>Which plans include CI?</summary>
+          <p>Edge and Mill. The GitHub Action and GitLab job call the runs API and fail when a required metric is below the floor you set.</p>
+        </details>
+        <details>
+          <summary>Who do I write for billing?</summary>
+          <p>Billing questions go to ujjwal@stropel.xyz.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+  <div id="chrome-footer"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
